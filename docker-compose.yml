@@ -1,0 +1,17 @@
+services:
+  development:
+    build:
+      context: .
+      dockerfile: Development.Dockerfile
+    ports:
+      - 9000:8080
+    volumes:
+      - ./function:/usr/app/function
+
+  tests:
+    build:
+      context: .
+      dockerfile: Development.Dockerfile
+    command: ./entrypoint.test.sh
+    environment:
+      - NODE_ENV=test

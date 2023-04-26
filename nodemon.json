@@ -1,0 +1,5 @@
+{
+  "watch": ["function"],
+  "ext": "ts,json",
+  "exec": "./entrypoint.dev.sh"
+}

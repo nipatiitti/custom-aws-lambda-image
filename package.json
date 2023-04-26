@@ -1,0 +1,27 @@
+{
+  "name": "custom-aws-image",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "esbuild function/index.ts --platform=node --bundle --target=node14 --outfile=dist/index.js",
+    "build": "esbuild function/index.ts --platform=node --bundle --minify --target=node14 --outfile=dist/index.js",
+    "dev": "nodemon",
+    "test": "mocha"
+  },
+  "author": "Niilo Jaakkola <niilo.jaakkola@icloud.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.114",
+    "@types/mocha": "^10.0.1",
+    "esbuild": "^0.17.16",
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.11",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
