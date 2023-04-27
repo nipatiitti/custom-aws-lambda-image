@@ -18,7 +18,6 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 RUN yarn add aws-lambda-ric
 
-
 # Copy the source code
 COPY function ./function
 COPY tsconfig.json ./
@@ -37,14 +36,10 @@ COPY --from=build-image /usr/app/package.json ./package.json
 
 RUN apt-get update
 
-# Librsvg2 (rsvg-convert)
-RUN apt-get install -y librsvg2-bin
-
-# Inkscape 1.0.2
-RUN apt-get install -y inkscape
-
-# pstoedit
-RUN apt-get install -y pstoedit
+# Install any dependencies you might need e.g.
+# RUN apt-get update && apt-get install -y \
+#   inkscape \
+#   imagemagick
 
 # Install the aws-lambda-ric
 COPY --from=build-image /usr/app/node_modules/aws-lambda-ric ./node_modules/aws-lambda-ric

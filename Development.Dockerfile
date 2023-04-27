@@ -12,20 +12,20 @@ RUN apt-get update && \
     lsof
 
 
+# Install any dependencies you might need e.g.
+# RUN apt-get update && apt-get install -y \
+#   inkscape \
+#   imagemagick
+
+
 # Install dependencies
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 RUN yarn add aws-lambda-ric
 
-# Copy the source code
-# We will mount the source code as a volume in the docker-compose file for reloads on changes
-COPY function ./function
-COPY tests ./tests
-COPY tsconfig.json ./
-COPY nodemon.json ./
-COPY .mocharc.json ./
+# Copy the rest
+COPY . .
 
-# Copy the entrypoint scripts
 COPY entrypoint.dev.sh ./
 RUN chmod +x ./entrypoint.dev.sh
 
@@ -34,5 +34,6 @@ RUN chmod +x ./entrypoint.test.sh
 
 # Copy the aws-lambda-runtime-interface-emulator
 COPY aws-lambda-rie ./aws-lambda-rie
+RUN chmod +x ./aws-lambda-rie
 
 CMD ["yarn", "dev"]
